@@ -93,7 +93,10 @@ impl EscrowContract {
             .expect("Escrow not found");
 
         escrow.depositor.require_auth();
-        assert!(escrow.status == EscrowStatus::Active, "Escrow is not active");
+        assert!(
+            escrow.status == EscrowStatus::Active,
+            "Escrow is not active"
+        );
 
         let current_time = env.ledger().timestamp();
         assert!(
@@ -133,8 +136,7 @@ impl EscrowContract {
         admin.require_auth();
 
         assert!(
-            escrow.status == EscrowStatus::Active
-                || escrow.status == EscrowStatus::Disputed,
+            escrow.status == EscrowStatus::Active || escrow.status == EscrowStatus::Disputed,
             "Escrow cannot be refunded in current status"
         );
 
@@ -179,7 +181,10 @@ impl EscrowContract {
             .expect("Escrow not found");
 
         escrow.beneficiary.require_auth();
-        assert!(escrow.status == EscrowStatus::Active, "Escrow is not active");
+        assert!(
+            escrow.status == EscrowStatus::Active,
+            "Escrow is not active"
+        );
 
         escrow.status = EscrowStatus::Disputed;
         env.storage()
